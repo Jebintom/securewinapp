@@ -6,7 +6,7 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  String _selectedUserType = 'Select'; // Default value
+  String _selectedUserType = 'UserType'; // Default value
   String _agencyNo = ''; // Agency number field value
   String _email = '';
   String _password = '';
