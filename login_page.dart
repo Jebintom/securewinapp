@@ -8,6 +8,45 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   String _selectedUserType = 'Select'; // Default value
+  String _username = '';
+  String _password = '';
+
+  // Function to authenticate user
+  Future<void> _login() async {
+    // Validate input fields
+    if (_username.isNotEmpty && _password.isNotEmpty) {
+      // Perform authentication with backend/database
+      // You should implement your authentication logic here
+      // For example, calling an API endpoint with the username and password
+      // If authentication is successful, navigate to appropriate page
+      if (_selectedUserType == 'Seller') {
+        // Example: Replace the below line with your navigation logic
+        Navigator.pushNamed(context, '/seller');
+      } else if (_selectedUserType == 'Buyer') {
+        // Example: Replace the below line with your navigation logic
+        Navigator.pushNamed(context, '/buyer');
+      }
+    } else {
+      // Show error message if fields are empty
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Please fill all fields.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +70,11 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: InputDecoration(
                     labelText: 'Username',
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      _username = value;
+                    });
+                  },
                 ),
               ),
               SizedBox(height: 20),
@@ -41,6 +85,11 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: InputDecoration(
                     labelText: 'Password',
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      _password = value;
+                    });
+                  },
                 ),
               ),
               SizedBox(height: 20),
@@ -66,15 +115,7 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 width: screenWidth * 0.7,
                 child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                     if (_selectedUserType == 'Seller') {
-                        Navigator.pushNamed(context, '/seller');
-                      } else if (_selectedUserType == 'Buyer') {
-                         Navigator.pushNamed(context, '/buyer');
-                        }
-                      });
-                      },
+                  onPressed: _login,
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
                         Color(0xFF04004B)),
