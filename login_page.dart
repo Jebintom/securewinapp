@@ -7,7 +7,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String _selectedUserType = 'Select'; // Default value
+  String _selectedUserType = 'UserType'; // Default value
 
   @override
   Widget build(BuildContext context) {
